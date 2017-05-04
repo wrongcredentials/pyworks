@@ -48,9 +48,3 @@ def task3():
 	print(result)
 
 task3()
-
-
-
-
-
-
