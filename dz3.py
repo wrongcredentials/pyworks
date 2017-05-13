@@ -1,18 +1,45 @@
-# Python параметры по умолчанию
-# Для одного и того же класса реализовать
-# p = Person()
-# p.get_name() -> Vasya
-# p.get_age() -> 28
-# p2 = Person("Petya", 29)
-# p.get_name() -> Petya
-# p.get_age() -> 29
+#Python Homework 3
+#Задание №1
 
-# deck = CardDeck() -> Создали колоду карт
-# deck.shuffle() -> Перемешали
-# card = deck.pop() -> Вернул верхнюю карту и убрал из колоды
+#Задание №2
+import random
 
-# card.value() -> 2, 10, Туз, Валет
-# card.suit() -> Пики, Крести
+class CardDeck:
+	def __init__(self):
+		self.value = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"]
+		self.suit = ["Spades", "Hearts", "Diamonds", "Clubs"]
+		self.cards = []
+		self.first_card = ""
+	
+	def deck_create(self):
+		for suit in self.suit:
+			for value in self.value:
+				new_card = [value, suit]
+				self.cards.append(new_card)
+		return self.cards
 
-#card2 = deck.pop() -> Вернул следующую карту
-#2 класса - колода карт и карта
+	def deck_shuffle(self):
+		random.shuffle(self.cards)
+		return self.cards
+
+	def deck_pop(self):
+		self.first_card = self.cards[0]
+		self.cards = self.cards[1:]
+		return self.first_card
+
+	def card_suite(self):
+		return self.first_card[1]
+
+	def card_value(self):
+		return self.first_card[0]
+
+
+deck = CardDeck()
+deck.deck_create()
+deck.deck_shuffle()
+for i in range(5):
+	deck.deck_pop()
+	print("Suite: ", deck.card_suite())
+	print("Value: ", deck.card_value())
+
+
