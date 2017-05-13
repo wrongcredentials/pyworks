@@ -1,7 +1,29 @@
 #Python Homework 3
-#Задание №1
+
+#Задание №1 
+
+class Person:
+	def __init__(self, name = "Vasya", age = 28):
+		self.name = name
+		self.age = age
+
+	def __str__(self):
+		return "Name: {}, Age: {}".format(self.name, self.age)
+
+	def get_name(self):
+		return self.name
+
+	def get_age(self):
+		return self.age
+
+p = Person()
+print(p.get_name(), p.get_age())
+
+p2 = Person("Petya", 29)
+print(p2.get_name(), p2.get_age())
 
 #Задание №2
+
 import random
 
 class CardDeck:
