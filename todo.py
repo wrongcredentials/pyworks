@@ -10,8 +10,10 @@ def read():
 				result = """{}. {}""".format(count, i)
 				print(result)
 				count += 1
+	
 	except ValueError:
 		print(">> ERROR: Cannot read file")
+
 
 def add(task):	
 	try:
@@ -29,16 +31,18 @@ def add(task):
 
 
 def remove(id):
-	with open("data.json","r+") as f:
-		d = (json.load(f))
-		try:
-			del d[id-1]
-			with open("data.json", "w") as f:
-				json.dump(d, f)
+	if id > 0:
+		with open("data.json","r+") as f:
+			d = (json.load(f))
+			try:
+				del d[id-1]
+				with open("data.json", "w") as f:
+					json.dump(d, f)
 		
-		except IndexError:
-			print(">> No task with index", id)
-
+			except IndexError:
+				print(">> No task with index", id)
+	else:
+		print(">> ERROR: Invalid index")	
 
 def up(id):
 	if id > 1:
@@ -110,6 +114,7 @@ def main(option, value):
 
 	except FileNotFoundError:
 		print(">> ERROR: You don't have active to do list. Create new using -a")
+	
 	except ValueError:
 		print(">> ERROR: You have to pass the index of task when use '" + str(option) + "'")
 
@@ -117,4 +122,3 @@ try:
 	main(sys.argv[1], sys.argv[2:])
 except:
 	print(">> ERROR: Unknown command. Use -h for help")
-
