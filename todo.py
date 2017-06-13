@@ -5,14 +5,17 @@ def read():
 	try:
 		with open("data.json","r") as f:
 			d = json.load(f)
-			count = 1
-			for i in d:
-				result = """{}. {}""".format(count, i)
-				print(result)
-				count += 1
+			if d:
+				count = 1
+				for i in d:
+					result = """{}. {}""".format(count, i)
+					print(result)
+					count += 1
+			else:
+				print(">> File is empty. Start adding new tasks using -a")
 	
 	except ValueError:
-		print(">> ERROR: Cannot read file")
+		print(">> ERROR: Cannot read file. Use -a to create new")
 
 
 def add(task):	
@@ -21,7 +24,7 @@ def add(task):
 			d = json.load(f)
 	
 	except:
-		print(">> File is empty or does not exist. Creating new now...")
+		print(">> WARNING: File is broken or does not exist. Creating new now... Done")
 		d = []
 	
 	finally:
@@ -40,9 +43,10 @@ def remove(id):
 					json.dump(d, f)
 		
 			except IndexError:
-				print(">> No task with index", id)
+				print(">> ERROR: No task with index", id)
 	else:
 		print(">> ERROR: Invalid index")	
+
 
 def up(id):
 	if id > 1:
@@ -54,7 +58,7 @@ def up(id):
 					json.dump(d, f)			
 	
 			except IndexError:
-				print(">> No task with index", id)
+				print(">> ERROR: No task with index", id)
 
 	else:
 		print(">> ERROR: Invalid index")		
@@ -72,11 +76,11 @@ def down(id):
 				print(">> ERROR: Invalid index")
 	
 	except IndexError:
-		print(">> No task with index", id)
+		print(">> ERROR: No task with index", id)
 
 
 def help():
-	text = """      Simple To Do List v.1.0.0:
+	text = """      Simple To Do List v.1.0.1:
 -l              receieve a to do list
 -a task_name	add new task to list 
 -r task_id      remove task from list
